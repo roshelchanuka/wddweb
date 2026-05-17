@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, Menu, X, User, Search } from 'lucide-react';
+import { ShoppingCart, Menu, X, User } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
 
 export default function Header() {
@@ -22,7 +22,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-neutral-100 shadow-sm">
+    <header className="sticky top-0 z-50 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -31,9 +31,9 @@ export default function Header() {
               <img
                 src={`${import.meta.env.BASE_URL}image/logo.avif`}
                 alt="Velvet Vogue Logo"
-                className="h-14 w-14 object-contain rounded-full border border-neutral-100 shadow-sm"
+                className="h-14 w-14 object-contain rounded-full border border-neutral-800 shadow-sm bg-neutral-900"
               />
-              <span className="font-extrabold text-xl tracking-wider bg-gradient-to-r from-brand to-emerald-600 bg-clip-text text-transparent">
+              <span className="font-extrabold text-xl tracking-wider bg-gradient-to-r from-brand to-emerald-500 bg-clip-text text-transparent">
                 VELVET VOGUE
               </span>
             </Link>
@@ -48,7 +48,7 @@ export default function Header() {
                 className={`relative px-1 py-2 text-sm font-semibold tracking-wide transition-colors duration-200 ${
                   isActive(link.path)
                     ? 'text-brand'
-                    : 'text-neutral-600 hover:text-brand'
+                    : 'text-neutral-300 hover:text-brand'
                 }`}
               >
                 {link.name}
@@ -61,13 +61,13 @@ export default function Header() {
 
           {/* Right Side Icons */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/signup" className="text-neutral-600 hover:text-brand transition-colors duration-200">
+            <Link to="/signup" className="text-neutral-300 hover:text-brand transition-colors duration-200">
               <User size={22} />
             </Link>
 
             <Link
               to="/cart"
-              className="relative p-2 text-neutral-600 hover:text-brand transition-colors duration-200"
+              className="relative p-2 text-neutral-300 hover:text-brand transition-colors duration-200"
             >
               <ShoppingCart size={22} />
               {cartTotalCount > 0 && (
@@ -82,7 +82,7 @@ export default function Header() {
           <div className="flex md:hidden items-center space-x-4">
             <Link
               to="/cart"
-              className="relative p-2 text-neutral-600 hover:text-brand"
+              className="relative p-2 text-neutral-300 hover:text-brand"
             >
               <ShoppingCart size={22} />
               {cartTotalCount > 0 && (
@@ -94,7 +94,7 @@ export default function Header() {
             
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-neutral-600 hover:text-brand focus:outline-none"
+              className="text-neutral-300 hover:text-brand focus:outline-none"
             >
               {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
@@ -104,7 +104,7 @@ export default function Header() {
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden animate-reveal bg-white border-t border-neutral-100 px-4 py-4 space-y-3 shadow-lg">
+        <div className="md:hidden animate-reveal bg-neutral-950 border-t border-neutral-900 px-4 py-4 space-y-3 shadow-2xl">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -113,17 +113,17 @@ export default function Header() {
               className={`block px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
                 isActive(link.path)
                   ? 'bg-brand/10 text-brand'
-                  : 'text-neutral-600 hover:bg-neutral-50 hover:text-brand'
+                  : 'text-neutral-300 hover:bg-neutral-900 hover:text-brand'
               }`}
             >
               {link.name}
             </Link>
           ))}
-          <div className="border-t border-neutral-100 pt-4 flex items-center justify-around">
+          <div className="border-t border-neutral-900 pt-4 flex items-center justify-around">
             <Link
               to="/signup"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2 px-4 py-2 text-neutral-600 hover:text-brand font-semibold text-sm"
+              className="flex items-center gap-2 px-4 py-2 text-neutral-300 hover:text-brand font-semibold text-sm"
             >
               <User size={20} />
               Account

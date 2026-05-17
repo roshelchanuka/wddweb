@@ -6,17 +6,17 @@
 
 @layer base {
   body {
-    @apply bg-neutral-50 text-neutral-800 font-sans antialiased selection:bg-brand selection:text-white;
+    @apply bg-neutral-950 text-neutral-300 font-sans antialiased selection:bg-brand selection:text-white;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight text-neutral-900;
+    @apply font-semibold tracking-tight text-white;
   }
 }
 
 @layer components {
   .glass-card {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-glass rounded-2xl;
+    @apply bg-neutral-900/40 backdrop-blur-md border border-neutral-800/80 shadow-glass rounded-2xl;
   }
   
   .btn-primary {
@@ -28,7 +28,7 @@
   }
   
   .input-field {
-    @apply w-full px-4 py-3 bg-white/50 border border-neutral-200 rounded-lg focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all duration-200;
+    @apply w-full px-4 py-3 bg-neutral-900/60 border border-neutral-800 rounded-lg focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand transition-all duration-200 text-white;
   }
 }
 
@@ -39,11 +39,11 @@
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-neutral-100;
+  @apply bg-neutral-950;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-neutral-300 rounded-full hover:bg-neutral-400 transition-colors;
+  @apply bg-neutral-850 rounded-full hover:bg-neutral-750 transition-colors;
 }
 
 /* Slide Reveal Animation Utility */
