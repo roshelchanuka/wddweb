@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmed - Velvet Vogue</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+
+<!-- navbar start-->
+<section id="header">
+    <a href="index.html"> <img src="./image/logo.avif" class="logo" height="100" width="100" alt="Logo"></a>
+    <div> 
+        <ul id="navbar">
+            <li> <a href="index.html">Product categories</a></li>
+            <li> <a href="shop.html">Shopping cart</a></li>
+            <li> <a href="customer.php">customer support</a></li>
+            <li> <a href="blog.html">Blog</a></li>
+            <li> <a href="about.html">About</a></li>
+            <li> 
+                <a href="cart.html"> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            </li>
+            <li> <a href="sign-up.php">sign-up</a></li>
+        </ul>
+    </div>
+</section>
+<!-- navbar end -->
+
+<div class="success-wrapper">
+    <div class="success-card">
+        <div class="success-icon"><i class="fa fa-check" aria-hidden="true"></i></div>
+        <h1>Order Placed Successfully!</h1>
+        <p>Thank you for shopping with Velvet Vogue. Your fashion essentials have been reserved and we are preparing them for shipment. A simulated receipt has been rendered below.</p>
+        
+        <div class="order-badge">ORDER NUMBER: <span id="order-id">#VV-000000</span></div>
+
+        <!-- Rendered dynamically from localStorage -->
+        <div class="receipt-container" id="receipt-area">
+            <!-- Loading skeleton or fallback -->
+        </div>
+
+        <div class="success-actions">
+            <a href="shop.html" class="btn-success">Continue Shopping</a>
+            <a href="index.html" class="btn-outline-success">Return to Home</a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer start -->
+<footer class="section-p1">
+    <div class="col">
+        <img class="logo" src="./image/logo.avif" alt="" width="70" height="70">
+        <h4>Contact</h4>
+        <p><strong>Address:</strong> 12 Kottawa,Main Street,Colombo.</p>
+        <p><strong>Phone:</strong> 031-2345689 / +94-790815041</p>
+        <p><strong>Hours:</strong> 10.00 AM. to 10.30PM. Mon - Sun</p>
+        <div class="Follow">
+            <h4>Follow us</h4>
+            <div class="icon">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col">
+        <h4>About</h4>
+        <a href="#">About us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms and Conditions</a>
+        <a href="#">Contact Us</a>
+    </div>
+    
+    <div class="col">
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="cart.html">View Cart</a>
+        <a href="#">My Wish List</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
+    </div>
+    
+    <div class="col install">
+        <h4>From App Store or Google Play.</h4>
+        <div class="row">
+            <img src="./image/app3.jpg" alt="App Store" height="70" width="70">
+            <img src="./image/play.png" alt="Google Play" height="70" width="70">
+        </div>
+        <p>Secured Payment Gateways.</p>
+        <img src="./image/Payment Getways2.png" alt="Payment Gateways">
+    </div>
+    
+    <div class="copyright">
+        <p>© 2024 All rights reserved. - HTML-CSS Template</p>
+    </div>
+</footer> 
+<!-- Footer end -->
+
+<!-- Scripts -->
+<script src="cart-helper.js"></script>
+<script>
+    // Format utility
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('en-LK', {
+            style: 'currency',
+            currency: 'LKR',
+            minimumFractionDigits: 2
+        }).format(amount);
+    }
+
+    // Dynamic Invoice Generation
+    function generateInvoice() {
+        const orderIdEl = document.getElementById('order-id');
+        const receiptArea = document.getElementById('receipt-area');
+
+        // Retrieve order details
+        const orderData = localStorage.getItem('velvet_vogue_last_order');
+        if (!orderData) {
+            receiptArea.innerHTML = `<p style="text-align:center; color:#888;">No recent purchase details found.</p>`;
+            return;
+        }
+
+        const order = JSON.parse(orderData);
+        
+        // Generate random order ID
+        const randomId = 'VV-' + Math.floor(100000 + Math.random() * 900000);
+        orderIdEl.textContent = '#' + randomId;
+
+        // Estimated delivery: 4 to 6 business days from today
+        const today = new Date();
+        const deliveryStart = new Date(today);
+        deliveryStart.setDate(today.getDate() + 4);
+        const deliveryEnd = new Date(today);
+        deliveryEnd.setDate(today.getDate() + 6);
+
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        const deliveryWindow = `${deliveryStart.toLocaleDateString('en-US', options)} - ${deliveryEnd.toLocaleDateString('en-US', options)}`;
+
+        // Generate product rows
+        let itemsHtml = '';
+        order.items.forEach(item => {
+            itemsHtml += `
+                <tr>
+                    <td>
+                        <div class="receipt-product">
+                            <img class="receipt-product-img" src="${item.image}" alt="${item.name}">
+                            <div>
+                                <h5 class="receipt-product-name">${item.name}</h5>
+                                <span class="receipt-product-size">Size: ${item.size}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>x ${item.quantity}</td>
+                    <td style="text-align: right; font-weight: 600;">${formatCurrency(item.price * item.quantity)}</td>
+                </tr>
+            `;
+        });
+
+        const finalTotal = order.subtotal - order.discount + order.shipping;
+
+        receiptArea.innerHTML = `
+            <div class="receipt-header">Simulated Customer Receipt</div>
+            
+            <div class="shipping-details">
+                <div class="shipping-col">
+                    <h4>Customer Information</h4>
+                    <p>${order.name}</p>
+                    <p>${order.email}</p>
+                </div>
+                <div class="shipping-col">
+                    <h4>Shipping Address</h4>
+                    <p>${order.address}</p>
+                    <p>${order.city}, Sri Lanka</p>
+                </div>
+                <div class="shipping-col" style="margin-top: 10px;">
+                    <h4>Delivery Estimate</h4>
+                    <p style="color: #088178; font-weight: 700;">${deliveryWindow}</p>
+                </div>
+                <div class="shipping-col" style="margin-top: 10px;">
+                    <h4>Payment Method</h4>
+                    <p>${order.c_payment === 'card' ? 'Visa / MasterCard' : order.c_payment === 'bank' ? 'Bank Transfer' : 'Cash on Delivery (COD)'}</p>
+                </div>
+            </div>
+
+            <table class="receipt-table">
+                <thead>
+                    <tr>
+                        <th style="width: 60%;">Items Purchased</th>
+                        <th>Qty</th>
+                        <th style="text-align: right;">Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${itemsHtml}
+                </tbody>
+            </table>
+
+            <div class="receipt-price-summary">
+                <div class="receipt-price-row">
+                    <span>Subtotal</span>
+                    <span>${formatCurrency(order.subtotal)}</span>
+                </div>
+                ${order.discount > 0 ? `
+                <div class="receipt-price-row discount-row">
+                    <span>Discount ${order.appliedCouponCode ? `(${order.appliedCouponCode})` : ''}</span>
+                    <span>-${formatCurrency(order.discount)}</span>
+                </div>
+                ` : ''}
+                <div class="receipt-price-row">
+                    <span>Shipping Fee</span>
+                    <span>${formatCurrency(order.shipping)}</span>
+                </div>
+                <div class="receipt-price-row grand-total">
+                    <span>Amount Paid</span>
+                    <span>${formatCurrency(finalTotal)}</span>
+                </div>
+            </div>
+        `;
+    }
+
+    // Run checkout summaries
+    generateInvoice();
+</script>
+
+</body>
+</html>

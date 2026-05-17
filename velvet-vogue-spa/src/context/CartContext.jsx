@@ -15,32 +15,42 @@ export const CartProvider = ({ children }) => {
   const addToCart = (product, quantity = 1, size = 'M') => {
     setCartItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex(
-        (item) => item.id === product.id && item.size === size
+        (item) => (product.id && item.id === product.id && item.size === size) ||
+                  (product.name && item.name && item.name.toLowerCase() === product.name.toLowerCase() && item.size === size)
       );
 
       if (existingItemIndex > -1) {
-        // Product with same size already in cart, increment quantity
         const newItems = [...prevItems];
         newItems[existingItemIndex].quantity += quantity;
         return newItems;
       } else {
-        // New item, add to array
-        return [...prevItems, { ...product, quantity, size }];
+        return [...prevItems, { 
+          id: product.id || null,
+          name: product.name,
+          price: parseFloat(product.price),
+          image: product.image || './image/logo.avif',
+          quantity: parseInt(quantity),
+          size: size || 'N/A'
+        }];
       }
     });
   };
 
-  const removeFromCart = (id, size) => {
+  const removeFromCart = (id, size, name) => {
     setCartItems((prevItems) =>
-      prevItems.filter((item) => !(item.id === id && item.size === size))
+      prevItems.filter((item) => !(
+        (id && item.id === id && item.size === size) ||
+        (name && item.name === name && item.size === size)
+      ))
     );
   };
 
-  const updateQuantity = (id, size, newQuantity) => {
+  const updateQuantity = (id, size, newQuantity, name) => {
     if (newQuantity < 1) return;
     setCartItems((prevItems) =>
       prevItems.map((item) =>
-        item.id === id && item.size === size
+        ((id && item.id === id && item.size === size) ||
+         (name && item.name === name && item.size === size))
           ? { ...item, quantity: newQuantity }
           : item
       )

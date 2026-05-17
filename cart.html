@@ -1,154 +1,468 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-
-
-<link rel="stylesheet" href="style.css"> 
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Velvet Vogue</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <link rel="stylesheet" href="style.css"> 
+</head>
 <body>
 
-
 <!-- navbar start-->
-
 <section id="header">
-<a herf="#"> <img src="./image/logo.avif" class="logo"  height="100"width="100" alt=""></a>
-<div> 
-  <ul id="navbar">
-     <li> <a   href="index.html">Product categories</a></li>
-     <li> <a  href="shop.html">Shopping cart</a></li>
-     <li> <a href="customer.php">customer support</a></li>
-     <li> <a href="blog.html">Blog</a></li>
-     <li> <a href="about.html">About</a></li>
-     <li> 
-        <a class="active" herf="cart.html"> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-        <li> <a href="sign-up.php">sign-up</a></li>
-     </li>
-  </ul>
-</div>
+    <a href="index.html"> <img src="./image/logo.avif" class="logo" height="100" width="100" alt="Logo"></a>
+    <div> 
+        <ul id="navbar">
+            <li> <a href="index.html">Product categories</a></li>
+            <li> <a href="shop.html">Shopping cart</a></li>
+            <li> <a href="customer.php">customer support</a></li>
+            <li> <a href="blog.html">Blog</a></li>
+            <li> <a href="about.html">About</a></li>
+            <li> 
+                <a class="active" href="cart.html"> <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+            </li>
+            <li> <a href="sign-up.php">sign-up</a></li>
+        </ul>
+    </div>
 </section>
-
 <!-- navbar end -->
 
-<div class="cart-container" style="margin-bottom: 50px; margin-top: 50px;">
-    <table>
-        <thead>
-            <tr>
-                <th>Product Image</th>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td colspan="6" class="empty-cart">Your cart is empty</td>
-            </tr>
-            <!-- Example product row (can be dynamically generated) -->
-             <tr>
-                <td><img src="./image/NIKE+REVOLUTION+7.1.png" alt="Product" class="product-img"></td>
-                <td>Nike Revolution 7  Men's Road Running Shoes</td>
-                <td>Rs 13500.00</td>
-                <td>1</td>
-                <td>Rs 13500.00</td>
-                <td><button class="button">Remove</button></td>
-            </tr> 
-
-
-            <tr>
-                <td><img src="./image/polomen1.jpg" alt="Product" class="product-img"></td>
-                <td>Ralph Lauren Declan II Warm Snuff Brown Mens Slipper</td>
-                <td>Rs 10,000.00</td>
-                <td>1</td>
-                <td>Rs 10,000.00</td>
-                <td><button class="button">Remove</button></td>
-            </tr> 
-
-        </tbody>
-    </table>
-    <div class="cart-total">
-        Total: Rs 23500.00 LKR
+<!-- Main Cart Wrapper -->
+<div class="cart-wrapper">
+    <div class="cart-title-section">
+        <h1>Your Shopping Cart</h1>
+        <p>Review your selected fashion essentials and checkout securely.</p>
     </div>
-    <div class="button-container">
-        <button class="button">Update</button>
-        <button class="button">Continue Shopping</button>
-        <button class="button checkout">Check Out</button>
+
+    <!-- Dynamic Cart Layout -->
+    <div id="cart-content-area">
+        <!-- Rendered dynamically by JavaScript -->
     </div>
 </div>
 
+<!-- Checkout Form Modal -->
+<div class="modal-overlay" id="checkout-modal-overlay">
+    <div class="checkout-modal">
+        <button class="modal-close" id="close-checkout">&times;</button>
+        <h2>Secure Checkout</h2>
+        <p>Enter your shipping and delivery details to place your simulated order.</p>
+        <form id="checkout-form">
+            <div class="form-group">
+                <label for="c-name">Full Name</label>
+                <input type="text" id="c-name" class="form-control" required placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label for="c-email">Email Address</label>
+                <input type="email" id="c-email" class="form-control" required placeholder="name@example.com">
+            </div>
+            <div class="form-group">
+                <label for="c-phone">Delivery Contact Number</label>
+                <input type="tel" id="c-phone" class="form-control" required placeholder="+94 7X XXX XXXX">
+            </div>
+            <div class="form-group">
+                <label for="c-address">Shipping Address</label>
+                <input type="text" id="c-address" class="form-control" required placeholder="Street address, Apartment, Suite">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="c-city">City</label>
+                    <input type="text" id="c-city" class="form-control" required placeholder="e.g. Colombo">
+                </div>
+                <div class="form-group">
+                    <label for="c-payment">Payment Method</label>
+                    <select id="c-payment" class="form-control" required>
+                        <option value="cod">Cash on Delivery (COD)</option>
+                        <option value="card">Simulated Visa / MasterCard</option>
+                        <option value="bank">Bank Transfer</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="place-order-btn" id="btn-place-order">
+                <span id="btn-text"><i class="fa fa-lock" aria-hidden="true"></i> Place Order securely</span>
+            </button>
+        </form>
+    </div>
+</div>
 
-
-
-
-
-<section id="newsletter" class="section-p1" class="section-m1">
+<!-- Newsletter Sign-up -->
+<section id="newsletter" class="section-p1 section-m1">
     <div class="newstext">
-      <h4> Sign up For Newsletters</h4>
-     <b><p> Get E-mail updates about our latest shop and <span>special offers.</span></p></b> 
+        <h4>Sign up For Newsletters</h4>
+        <b><p>Get E-mail updates about our latest shop and <span>special offers.</span></p></b> 
     </div>
-    
     <div class="from">
-      <input type="text" placeholder="Your email address">
-      <button class="normal">Sign Up</button>
+        <input type="text" placeholder="Your email address">
+        <button class="normal">Sign Up</button>
     </div>
-    </section>
-    
-    <!-- footer start -->
-    <footer class="section-p1">
+</section>
+
+<!-- Footer start -->
+<footer class="section-p1">
     <div class="col">
-      <img class="logo" src="./image/logo.avif" alt="" width="70" height="70">
-      <h4>Contact</h4>
-      <p> <strong>Address:</strong>12 Kottawa,Main Street,Colombo.</p>
-      <p><strong>Phone:</strong> 031-2345689 / +94-790815041</p>
-      <p><strong>Hours: </strong>10.00 AM. to 10.30PM. Mon - Sun</p>
-      <div class="Follow">
-         <h4>Follow us</h4>
-         <div class="icon">
-            <i class="fab fa-facebook-f"></i>
-            <i class="fab fa-instagram"></i>
-            <i class="fab fa-youtube"></i>
-         </div>
-      </div>
-    </div>
-    
-    <div class="col">
-      <h4>About</h4>
-      <a href="#">About us</a>
-      <a href="#">Delivery Information</a>
-      <a href="#">Privacy Policy</a>
-      <a href="#">Terms and Conditions</a>
-      <a href="#">Contact Us</a>
+        <img class="logo" src="./image/logo.avif" alt="" width="70" height="70">
+        <h4>Contact</h4>
+        <p><strong>Address:</strong> 12 Kottawa,Main Street,Colombo.</p>
+        <p><strong>Phone:</strong> 031-2345689 / +94-790815041</p>
+        <p><strong>Hours:</strong> 10.00 AM. to 10.30PM. Mon - Sun</p>
+        <div class="Follow">
+            <h4>Follow us</h4>
+            <div class="icon">
+                <i class="fab fa-facebook-f"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
     </div>
     
-    
-    
+    <div class="col">
+        <h4>About</h4>
+        <a href="#">About us</a>
+        <a href="#">Delivery Information</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms and Conditions</a>
+        <a href="#">Contact Us</a>
+    </div>
     
     <div class="col">
-    <h4>My Account</h4>
-    <a href="#">Sign In</a>
-    <a href="#">View Chart</a>
-    <a href="#">My Wish List</a>
-    <a href="#">Track My Order</a>
-    <a href="#">Help</a>
+        <h4>My Account</h4>
+        <a href="#">Sign In</a>
+        <a href="cart.html">View Cart</a>
+        <a href="#">My Wish List</a>
+        <a href="#">Track My Order</a>
+        <a href="#">Help</a>
     </div>
     
     <div class="col install">
-    <h4>From App Store or Google Play.</h4>
-    <div class="row">
-      <img src="./image/app3.jpg" alt="App Store" height="70" width="70">
-      <img src="./image/play.png" alt="Google Play" height="70" width="70">
-    </div>
-    <p>Secured Payment Gateways.</p>
-    <img src="./image/Payment Getways2.png" alt="Payment Gateways">
+        <h4>From App Store or Google Play.</h4>
+        <div class="row">
+            <img src="./image/app3.jpg" alt="App Store" height="70" width="70">
+            <img src="./image/play.png" alt="Google Play" height="70" width="70">
+        </div>
+        <p>Secured Payment Gateways.</p>
+        <img src="./image/Payment Getways2.png" alt="Payment Gateways">
     </div>
     
     <div class="copyright">
-    <p>© 2024 All rights reserved. - HTML-CSS Template</p>
+        <p>© 2024 All rights reserved. - HTML-CSS Template</p>
     </div>
-    
-    </footer> 
-    
-    
-    <!-- footer end -->
-    
-    
-    </html>
+</footer> 
+<!-- Footer end -->
+
+<!-- Scripts -->
+<script src="cart-helper.js"></script>
+<script>
+    // State management for cart calculations
+    let appliedCoupon = null;
+    let shippingCost = 350; // Standard shipping default
+
+    // Format utility
+    function formatCurrency(amount) {
+        return new Intl.NumberFormat('en-LK', {
+            style: 'currency',
+            currency: 'LKR',
+            minimumFractionDigits: 2
+        }).format(amount);
+    }
+
+    // Dynamic renderer
+    function renderCart() {
+        const cartArea = document.getElementById('cart-content-area');
+        const items = cartHelper.getItems();
+
+        if (items.length === 0) {
+            cartArea.innerHTML = `
+                <div class="empty-cart-container">
+                    <div class="empty-cart-icon"><i class="fa fa-shopping-bag" aria-hidden="true"></i></div>
+                    <h2>Your Shopping Cart is Empty</h2>
+                    <p>Before you checkout, you must add some beautiful fashion elements to your shopping cart. You will find lots of interesting products on our shop page!</p>
+                    <a href="shop.html" class="continue-btn" style="max-width: 250px; margin: 0 auto; background-color: #088178; color: white;">Start Shopping Now</a>
+                </div>
+            `;
+            return;
+        }
+
+        // Generate dynamic table rows
+        let rowsHtml = '';
+        items.forEach((item, index) => {
+            const formattedUnitPrice = formatCurrency(item.price);
+            const formattedTotalItemPrice = formatCurrency(item.price * item.quantity);
+
+            rowsHtml += `
+                <tr id="cart-item-${index}">
+                    <td>
+                        <div class="cart-product-cell">
+                            <img class="cart-product-img" src="${item.image}" alt="${item.name}">
+                            <div>
+                                <h4 class="cart-product-name">${item.name}</h4>
+                                <span class="cart-product-size">Size: ${item.size}</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="cart-price">${formattedUnitPrice}</span>
+                    </td>
+                    <td>
+                        <div class="qty-controls">
+                            <button class="qty-btn minus" onclick="changeQty(${index}, -1)">&minus;</button>
+                            <input type="text" class="qty-input" value="${item.quantity}">
+                            <button class="qty-btn plus" onclick="changeQty(${index}, 1)">&plus;</button>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="cart-total-price" id="item-total-${index}">${formattedTotalItemPrice}</span>
+                    </td>
+                    <td>
+                        <button class="cart-remove-btn" onclick="removeItem(${index})"><i class="far fa-trash-alt"></i></button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        // Set up double column grid
+        cartArea.innerHTML = `
+            <div class="cart-grid">
+                <!-- Left: Items list -->
+                <div class="cart-items-card">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Product Details</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rowsHtml}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Right: Summary Card -->
+                <div class="cart-summary-card">
+                    <h3>Order Summary</h3>
+                    
+                    <!-- Promo Code -->
+                    <div class="promo-section">
+                        <div class="promo-form">
+                            <input type="text" id="promo-code-input" class="promo-input" placeholder="Coupon Code" value="${appliedCoupon ? appliedCoupon.code : ''}">
+                            <button class="promo-btn" onclick="applyCoupon()">Apply</button>
+                        </div>
+                        <p id="promo-msg" class="promo-feedback"></p>
+                    </div>
+
+                    <!-- Shipping options selector -->
+                    <div class="shipping-section">
+                        <label for="shipping-selector">Delivery Option</label>
+                        <select id="shipping-selector" class="shipping-select" onchange="updateShipping(this.value)">
+                            <option value="350" ${shippingCost === 350 ? 'selected' : ''}>Standard Shipping (Rs. 350.00)</option>
+                            <option value="600" ${shippingCost === 600 ? 'selected' : ''}>Express Courier Delivery (Rs. 600.00)</option>
+                            <option value="0" ${shippingCost === 0 ? 'selected' : ''}>Free Store Pickup (Rs. 0.00)</option>
+                        </select>
+                    </div>
+
+                    <!-- Live Breakdown calculations -->
+                    <div class="price-breakdown">
+                        <div class="price-row">
+                            <span>Subtotal</span>
+                            <span id="val-subtotal">Rs. 0.00</span>
+                        </div>
+                        <div class="price-row discount-row" id="discount-row-container" style="display: none;">
+                            <span id="discount-label">Discount</span>
+                            <span id="val-discount">-Rs. 0.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Shipping Cost</span>
+                            <span id="val-shipping">Rs. 0.00</span>
+                        </div>
+                        <div class="price-row grand-total">
+                            <span>Total Due</span>
+                            <span id="val-grandtotal">Rs. 0.00</span>
+                        </div>
+                    </div>
+
+                    <button class="checkout-btn" onclick="openCheckoutModal()">Proceed to Checkout <i class="fa fa-chevron-right" aria-hidden="true" style="font-size:12px; margin-left:5px;"></i></button>
+                    <a href="shop.html" class="continue-btn">Continue Shopping</a>
+                </div>
+            </div>
+        `;
+
+        calculateSummary();
+    }
+
+    // Summary calculations
+    function calculateSummary() {
+        const subtotal = cartHelper.getCartTotal();
+        let discount = 0;
+
+        const discountRow = document.getElementById('discount-row-container');
+        const discountLabel = document.getElementById('discount-label');
+        const discountValEl = document.getElementById('val-discount');
+
+        if (appliedCoupon) {
+            if (appliedCoupon.type === 'percentage') {
+                discount = subtotal * appliedCoupon.value;
+                discountLabel.textContent = `Discount (${appliedCoupon.code} - ${appliedCoupon.value * 100}%)`;
+            } else if (appliedCoupon.type === 'free_shipping') {
+                discount = shippingCost;
+                discountLabel.textContent = `Free Shipping (${appliedCoupon.code})`;
+            }
+            discountRow.style.display = 'flex';
+            discountValEl.textContent = `-${formatCurrency(discount)}`;
+        } else {
+            discountRow.style.display = 'none';
+        }
+
+        // Apply shipping calculations
+        let finalShipping = shippingCost;
+        if (appliedCoupon && appliedCoupon.type === 'free_shipping') {
+            finalShipping = 0;
+        }
+
+        const grandTotal = Math.max(0, subtotal - discount + (appliedCoupon && appliedCoupon.type === 'free_shipping' ? 0 : finalShipping));
+
+        // Inject UI texts
+        document.getElementById('val-subtotal').textContent = formatCurrency(subtotal);
+        document.getElementById('val-shipping').textContent = formatCurrency(finalShipping);
+        document.getElementById('val-grandtotal').textContent = formatCurrency(grandTotal);
+
+        // Render feedback note on coupons
+        const promoMsgEl = document.getElementById('promo-msg');
+        if (appliedCoupon && promoMsgEl) {
+            promoMsgEl.textContent = `Coupon "${appliedCoupon.code}" applied successfully! Saved ${formatCurrency(discount)}.`;
+            promoMsgEl.className = 'promo-feedback success';
+        }
+    }
+
+    // Coupon logic
+    function applyCoupon() {
+        const input = document.getElementById('promo-code-input');
+        const code = input.value.trim().toUpperCase();
+        const promoMsg = document.getElementById('promo-msg');
+
+        if (!code) {
+            promoMsg.textContent = 'Please enter a coupon code first!';
+            promoMsg.className = 'promo-feedback error';
+            return;
+        }
+
+        // Mock coupons
+        if (code === 'WELCOME20') {
+            appliedCoupon = { code: 'WELCOME20', type: 'percentage', value: 0.20 };
+            renderCart();
+        } else if (code === 'FREESHIP') {
+            appliedCoupon = { code: 'FREESHIP', type: 'free_shipping', value: 0 };
+            renderCart();
+        } else {
+            appliedCoupon = null;
+            promoMsg.textContent = 'Invalid promo code. Try "WELCOME20" or "FREESHIP"!';
+            promoMsg.className = 'promo-feedback error';
+            calculateSummary();
+        }
+    }
+
+    // Quantity modifiers
+    function changeQty(index, change) {
+        const items = cartHelper.getItems();
+        if (index >= 0 && index < items.length) {
+            const newQty = Math.max(1, items[index].quantity + change);
+            cartHelper.updateItemQuantity(index, newQty);
+            // Dynamic row refresh instead of full render to allow smooth number shifting
+            const row = document.getElementById(`cart-item-${index}`);
+            if (row) {
+                const qtyInput = row.querySelector('.qty-input');
+                const totalEl = row.querySelector('.cart-total-price');
+                if (qtyInput) qtyInput.value = newQty;
+                if (totalEl) totalEl.textContent = formatCurrency(items[index].price * newQty);
+            }
+            calculateSummary();
+        }
+    }
+
+    // Remove row animation
+    function removeItem(index) {
+        const row = document.getElementById(`cart-item-${index}`);
+        if (row) {
+            row.style.transition = 'all 0.4s ease';
+            row.style.opacity = '0';
+            row.style.transform = 'translateX(-20px)';
+            setTimeout(() => {
+                cartHelper.removeItem(index);
+                renderCart();
+            }, 400);
+        } else {
+            cartHelper.removeItem(index);
+            renderCart();
+        }
+    }
+
+    // Shipping selection
+    function updateShipping(cost) {
+        shippingCost = parseFloat(cost);
+        calculateSummary();
+    }
+
+    // Modal forms
+    const overlay = document.getElementById('checkout-modal-overlay');
+
+    function openCheckoutModal() {
+        overlay.classList.add('show');
+    }
+
+    document.getElementById('close-checkout').onclick = () => {
+        overlay.classList.remove('show');
+    };
+
+    overlay.onclick = (e) => {
+        if (e.target === overlay) {
+            overlay.classList.remove('show');
+        }
+    };
+
+    // Checkout submission handling
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('btn-place-order');
+        btn.disabled = true;
+        btn.innerHTML = `<span class="spinner"></span> Processing Simulated Payment...`;
+
+        // Capture shipping values to forward to thank-you page
+        const name = document.getElementById('c-name').value;
+        const email = document.getElementById('c-email').value;
+        const address = document.getElementById('c-address').value;
+        const city = document.getElementById('c-city').value;
+        
+        const orderSummary = {
+            name: name,
+            email: email,
+            address: address,
+            city: city,
+            items: cartHelper.getItems(),
+            subtotal: cartHelper.getCartTotal(),
+            discount: appliedCoupon ? (appliedCoupon.type === 'percentage' ? cartHelper.getCartTotal() * appliedCoupon.value : shippingCost) : 0,
+            shipping: appliedCoupon && appliedCoupon.type === 'free_shipping' ? 0 : shippingCost,
+            appliedCouponCode: appliedCoupon ? appliedCoupon.code : null
+        };
+
+        // Persist order details to capture on order-success page
+        localStorage.setItem('velvet_vogue_last_order', JSON.stringify(orderSummary));
+
+        // Simulate secure API/payment delay
+        setTimeout(() => {
+            cartHelper.clearCart();
+            window.location.href = 'order-success.html';
+        }, 1500);
+    });
+
+    // Run initial rendering
+    renderCart();
+
+    // Listen to outer events (e.g. cart badge triggers)
+    window.addEventListener('cartUpdated', renderCart);
+</script>
+
+</body>
+</html>
