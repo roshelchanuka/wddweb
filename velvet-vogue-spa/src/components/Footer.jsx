@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="space-y-6">
             <div className="flex items-center gap-2">
               <img
-                src="/image/logo.avif"
+                src={`${import.meta.env.BASE_URL}image/logo.avif`}
                 alt="Velvet Vogue"
                 className="h-12 w-12 rounded-full border border-neutral-800 bg-white"
               />
@@ -87,12 +87,12 @@ export default function Footer() {
             <p className="text-sm text-neutral-400">Available on Google Play & App Store</p>
             <div className="flex gap-4">
               <img
-                src="/image/app3.jpg"
+                src={`${import.meta.env.BASE_URL}image/app3.jpg`}
                 alt="App Store"
                 className="h-10 w-24 object-cover border border-neutral-700 rounded-lg cursor-pointer hover:border-brand transition-colors"
               />
               <img
-                src="/image/play.png"
+                src={`${import.meta.env.BASE_URL}image/play.png`}
                 alt="Google Play"
                 className="h-10 w-24 object-cover border border-neutral-700 rounded-lg cursor-pointer hover:border-brand transition-colors"
               />
@@ -101,7 +101,7 @@ export default function Footer() {
             <div className="space-y-2 pt-2">
               <p className="text-sm font-semibold text-white">Secured Payment Gateways</p>
               <img
-                src="/image/Payment Getways2.png"
+                src={`${import.meta.env.BASE_URL}image/Payment Getways2.png`}
                 alt="Payment Gateways"
                 className="max-h-8 object-contain rounded-md"
               />

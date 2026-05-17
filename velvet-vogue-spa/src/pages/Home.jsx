@@ -58,7 +58,7 @@ export default function Home() {
       {/* Hero Section */}
       <section 
         className="relative h-[85vh] bg-cover bg-top flex items-center px-6 sm:px-12 lg:px-24"
-        style={{ backgroundImage: "url('/image/background_image.jpg')" }}
+        style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/background_image.jpg')` }}
       >
         {/* Dark overlay for readability */}
         <div className="absolute inset-0 bg-white/20 backdrop-blur-[1px]" />
@@ -95,7 +95,7 @@ export default function Home() {
               className="flex flex-col items-center justify-center p-6 bg-white border border-neutral-100 rounded-2xl shadow-sm hover:shadow-premium hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             >
               <img 
-                src={feat.img} 
+                src={`${import.meta.env.BASE_URL}${feat.img.replace(/^\//, '')}`} 
                 alt={feat.title} 
                 className="h-20 w-20 object-contain mb-4 filter drop-shadow-sm" 
               />
@@ -171,7 +171,7 @@ export default function Home() {
       {/* Repair Services Banner */}
       <section 
         className="relative h-60 bg-cover bg-center flex flex-col items-center justify-center text-center px-4"
-        style={{ backgroundImage: "url('/image/banner.jpg')" }}
+        style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/banner.jpg')` }}
       >
         <div className="absolute inset-0 bg-neutral-900/60" />
         <div className="relative z-10 space-y-3">
@@ -254,7 +254,7 @@ export default function Home() {
         {/* Deal 1 */}
         <div 
           className="relative h-96 bg-cover bg-center rounded-3xl overflow-hidden flex flex-col justify-center px-8 sm:px-12 text-white group"
-          style={{ backgroundImage: "url('/image/banner_2new.jpg')" }}
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/banner_2new.jpg')` }}
         >
           <div className="absolute inset-0 bg-neutral-950/40 group-hover:bg-neutral-950/30 transition-colors duration-300" />
           <div className="relative z-10 space-y-4 max-w-sm">
@@ -273,7 +273,7 @@ export default function Home() {
         {/* Deal 2 */}
         <div 
           className="relative h-96 bg-cover bg-center rounded-3xl overflow-hidden flex flex-col justify-center px-8 sm:px-12 text-white group"
-          style={{ backgroundImage: "url('/image/banner_3.jpg')" }}
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/banner_3.jpg')` }}
         >
           <div className="absolute inset-0 bg-neutral-950/45 group-hover:bg-neutral-950/35 transition-colors duration-300" />
           <div className="relative z-10 space-y-4 max-w-sm">
@@ -295,7 +295,7 @@ export default function Home() {
         {/* Card 1 */}
         <div 
           className="relative h-56 bg-cover bg-center rounded-2xl overflow-hidden flex flex-col justify-center px-6 text-white"
-          style={{ backgroundImage: "url('/image/banner_4.jpg')" }}
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/banner_4.jpg')` }}
         >
           <div className="absolute inset-0 bg-neutral-950/30" />
           <div className="relative z-10 space-y-1">
@@ -307,7 +307,7 @@ export default function Home() {
         {/* Card 2 */}
         <div 
           className="relative h-56 bg-cover bg-center rounded-2xl overflow-hidden flex flex-col justify-center px-6 text-white"
-          style={{ backgroundImage: "url('/image/backimg3.jpg')" }}
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/backimg3.jpg')` }}
         >
           <div className="absolute inset-0 bg-neutral-950/35" />
           <div className="relative z-10 space-y-1">
@@ -319,7 +319,7 @@ export default function Home() {
         {/* Card 3 */}
         <div 
           className="relative h-56 bg-cover bg-center rounded-2xl overflow-hidden flex flex-col justify-center px-6 text-white"
-          style={{ backgroundImage: "url('/image/back5.jpg')" }}
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/back5.jpg')` }}
         >
           <div className="absolute inset-0 bg-neutral-950/30" />
           <div className="relative z-10 space-y-1">

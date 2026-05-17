@@ -29,7 +29,7 @@ export default function Header() {
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center gap-2">
               <img
-                src="/image/logo.avif"
+                src={`${import.meta.env.BASE_URL}image/logo.avif`}
                 alt="Velvet Vogue Logo"
                 className="h-14 w-14 object-contain rounded-full border border-neutral-100 shadow-sm"
               />
