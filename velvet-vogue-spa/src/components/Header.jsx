@@ -1,10 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, Menu, X, User } from 'lucide-react';
 import { CartContext } from '../context/CartContext';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isAtTop, setIsAtTop] = useState(true);
   const { cartTotalCount } = useContext(CartContext);
   const location = useLocation();
 
@@ -21,8 +23,39 @@ export default function Header() {
     return location.pathname.startsWith(path);
   };
 
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // Toggle top status
+      if (currentScrollY < 30) {
+        setIsAtTop(true);
+      } else {
+        setIsAtTop(false);
+      }
+
+      // Hide navbar when scrolling down, show when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 120) {
+        setIsVisible(false); // Scrolling down - hide
+      } else if (currentScrollY < lastScrollY) {
+        setIsVisible(true); // Scrolling up - show
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-neutral-950/80 backdrop-blur-md border-b border-neutral-900 shadow-lg">
+    <header 
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in-out ${
+        isVisible ? 'translate-y-0' : '-translate-y-full'
+      } bg-transparent border-transparent shadow-none`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}

@@ -19,7 +19,7 @@ function App() {
         <div className="flex flex-col min-h-screen bg-neutral-50 selection:bg-brand selection:text-white">
           {/* Header */}
           <Header />
-          
+
           {/* Main Content Area */}
           <main className="flex-grow">
             <Routes>
