@@ -129,30 +129,34 @@ export default function Cart() {
   };
 
   return (
-    <div 
-      className="min-h-screen pb-16 bg-cover bg-center bg-fixed relative"
-      style={{ backgroundImage: `url('/wddweb/image/shopheader.avif')` }}
-    >
-      {/* Dark Glassmorphism Overlay for entire page */}
-      <div className="absolute inset-0 bg-neutral-950/80 backdrop-blur-[6px] z-0"></div>
-
-      <div className="relative z-10 pt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-neutral-950 pb-16">
+      
+      {/* Hero Section (Like Home Page) using shopheader.avif */}
+      <section 
+        className="relative h-[85vh] bg-cover bg-center flex items-center pt-20 px-6 sm:px-12 lg:px-24 border-b border-neutral-900"
+        style={{ backgroundImage: `url('/wddweb/image/shopheader.avif')` }}
+      >
+        {/* Deep dark premium gradient overlay (left to right like home page) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/60 to-transparent backdrop-blur-[1px]" />
         
-        {/* Title Section */}
-        <div className="mb-10 text-center animate-reveal">
-          <span className="inline-block rounded-full bg-brand/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-brand backdrop-blur-md border border-brand/30 mb-4">
+        <div className="relative z-10 max-w-2xl space-y-6 animate-reveal">
+          <span className="inline-block rounded-full bg-brand/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-brand backdrop-blur-md border border-brand/30">
             Secure Checkout
           </span>
-          <h1 className="font-extrabold text-4xl sm:text-6xl text-white leading-tight drop-shadow-xl">
+          <h1 className="font-extrabold text-4xl sm:text-7xl text-white leading-tight mt-1 drop-shadow-xl">
             Shopping Bag
           </h1>
-          <p className="mt-4 text-neutral-300 text-base sm:text-lg font-medium drop-shadow-md">
+          <p className="text-neutral-300 text-base sm:text-lg font-medium max-w-md mb-6 leading-relaxed drop-shadow-md">
             {cartItems.length > 0 
               ? `Review your premium selected styles (${cartItems.reduce((acc, item) => acc + item.quantity, 0)} items)` 
               : 'Your elegant style collection is currently empty.'
             }
           </p>
         </div>
+      </section>
+
+      {/* Content Wrapper */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 relative z-10">
 
         {cartItems.length === 0 ? (
           /* Empty Cart State */
@@ -200,18 +204,28 @@ export default function Cart() {
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-4">
                             <img 
-                              src={item.image} 
+                              src={`${import.meta.env.BASE_URL}${item.image.replace(/^\//, '')}`} 
                               alt={item.name} 
                               className="w-16 h-16 rounded-lg object-cover border border-neutral-700 flex-shrink-0"
-                              onError={(e) => { e.target.src = './image/logo.avif'; }}
+                              onError={(e) => { e.target.src = `${import.meta.env.BASE_URL}image/logo.avif`; }}
                             />
                             <div>
-                              <h3 className="font-bold text-sm text-neutral-200 group-hover:text-brand transition-colors line-clamp-1 max-w-[180px] sm:max-w-[240px]">
+                              <p className="text-[10px] font-black uppercase tracking-wider text-brand mb-0.5">
+                                {item.brand || 'Velvet Vogue'}
+                              </p>
+                              <h3 className="font-bold text-sm text-neutral-200 group-hover:text-brand transition-colors line-clamp-2 max-w-[180px] sm:max-w-[240px]">
                                 {item.name}
                               </h3>
-                              <span className="inline-block mt-1 text-xs font-semibold px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded-md">
-                                Size: {item.size}
-                              </span>
+                              <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                                <span className="inline-block text-xs font-semibold px-2 py-0.5 bg-neutral-800 text-neutral-300 rounded-md">
+                                  Size: {item.size}
+                                </span>
+                                {item.category && (
+                                  <span className="inline-block text-xs font-semibold px-2 py-0.5 bg-neutral-900 border border-neutral-800 text-neutral-400 rounded-md capitalize">
+                                    {item.category}
+                                  </span>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </td>

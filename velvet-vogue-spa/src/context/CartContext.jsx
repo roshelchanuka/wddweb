@@ -26,8 +26,11 @@ export const CartProvider = ({ children }) => {
         return [...prevItems, { 
           id: product.id || null,
           name: product.name,
+          brand: product.brand || 'Velvet Vogue',
+          category: product.category || 'Apparel',
+          description: product.description || '',
           price: parseFloat(product.price),
-          image: product.image || './image/logo.avif',
+          image: product.image || '/image/logo.avif',
           quantity: parseInt(quantity),
           size: size || 'N/A'
         }];

@@ -48,15 +48,16 @@ export default function Shop() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-950 text-neutral-200 pt-28 pb-16">
+    <div className="min-h-screen bg-neutral-950 text-neutral-200 pb-16">
       {activeToast && (
         <div className="fixed bottom-5 right-5 z-50 max-w-sm rounded-xl border border-neutral-800 bg-neutral-900 px-5 py-3 text-sm font-semibold text-white shadow-2xl animate-reveal">
           Added "{activeToast}" to cart
         </div>
       )}
 
+      {/* Hero Section with transparent navbar overlap */}
       <section 
-        className="relative h-[85vh] bg-cover bg-center flex items-center px-6 sm:px-12 lg:px-24 border-b border-neutral-900"
+        className="relative h-[85vh] bg-cover bg-center flex items-center pt-20 px-6 sm:px-12 lg:px-24 border-b border-neutral-900"
         style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/shopheader.avif')` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/60 to-transparent backdrop-blur-[1px]" />
@@ -65,13 +66,13 @@ export default function Shop() {
           <span className="inline-block rounded-full bg-brand/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-brand backdrop-blur-md border border-brand/30">
             Velvet Vogue Catalog
           </span>
-          <h1 className="font-extrabold text-5xl sm:text-7xl text-white leading-tight mt-1 drop-shadow-xl">
+          <h1 className="text-4xl font-black leading-tight text-white drop-shadow-xl sm:text-5xl md:text-6xl">
             Shop premium summer wear, footwear, and seasonal essentials
           </h1>
         </div>
       </section>
 
-      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 mt-4">
         <div className="mb-8 grid gap-4 rounded-2xl border border-neutral-900 bg-neutral-900/50 p-4 md:grid-cols-[1fr_auto_auto]">
           <label className="relative block">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500" size={18} />
