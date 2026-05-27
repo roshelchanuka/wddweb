@@ -30,16 +30,13 @@ export default function Support() {
 
   return (
     <div 
-      className="min-h-screen py-16 relative"
+      className="min-h-screen py-12 sm:py-20 relative bg-cover bg-center bg-scroll md:bg-fixed"
       style={{ 
-        backgroundImage: 'url(/wddweb/image/aboutbanner.avif)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
+        backgroundImage: `url('${import.meta.env.BASE_URL}image/aboutbanner.avif')`
       }}
     >
       {/* Overlay to ensure text readability */}
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">

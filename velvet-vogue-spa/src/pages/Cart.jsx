@@ -133,8 +133,8 @@ export default function Cart() {
       
       {/* Hero Section (Like Home Page) using shopheader.avif */}
       <section 
-        className="relative h-[85vh] bg-cover bg-center flex items-center pt-20 px-6 sm:px-12 lg:px-24 border-b border-neutral-900"
-        style={{ backgroundImage: `url('/wddweb/image/shopheader.avif')` }}
+        className="relative h-[55vh] sm:h-[80vh] lg:h-[85vh] bg-cover bg-[position:40%_center] sm:bg-center flex items-center pt-20 px-6 sm:px-12 lg:px-24 border-b border-neutral-900"
+        style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/shopheader.avif')` }}
       >
         {/* Deep dark premium gradient overlay (left to right like home page) */}
         <div className="absolute inset-0 bg-gradient-to-r from-neutral-950/90 via-neutral-950/60 to-transparent backdrop-blur-[1px]" />

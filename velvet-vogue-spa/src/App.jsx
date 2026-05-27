@@ -10,6 +10,7 @@ import Support from './pages/Support';
 import About from './pages/About';
 import Blog from './pages/Blog';
 import Signup from './pages/Signup';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="/about" element={<About />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
             </Routes>
           </main>
 

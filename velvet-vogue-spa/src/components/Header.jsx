@@ -86,7 +86,7 @@ export default function Header() {
 
           {/* Right Side Icons */}
           <div className="hidden md:flex items-center space-x-6">
-            <Link to="/signup" className="text-neutral-300 hover:text-brand transition-colors duration-200">
+            <Link to="/login" className="text-neutral-300 hover:text-brand transition-colors duration-200">
               <User size={22} />
             </Link>
 
@@ -146,7 +146,7 @@ export default function Header() {
           ))}
           <div className="border-t border-neutral-900 pt-4 flex items-center justify-around">
             <Link
-              to="/signup"
+              to="/login"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center gap-2 px-4 py-2 text-neutral-300 hover:text-brand font-semibold text-sm"
             >

@@ -58,7 +58,7 @@ export default function Home() {
 
       {/* Hero Section */}
       <section 
-        className="relative h-[85vh] bg-cover bg-top flex items-center px-6 sm:px-12 lg:px-24"
+        className="relative h-[55vh] sm:h-[80vh] lg:h-[85vh] bg-cover bg-[position:70%_center] sm:bg-top flex items-center px-6 sm:px-12 lg:px-24"
         style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/background_image.jpg')` }}
       >
         {/* Deep dark premium gradient overlay */}
@@ -91,7 +91,7 @@ export default function Home() {
           </ScrollReveal>
         </div>
       </section>
-
+ 
       {/* Features Grid */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -106,7 +106,7 @@ export default function Home() {
                 <img 
                   src={`${import.meta.env.BASE_URL}${feat.img.replace(/^\//, '')}`} 
                   alt={feat.title} 
-                  className="h-20 w-20 object-contain mb-4 filter drop-shadow-sm brightness-90 contrast-125" 
+                  className="h-16 w-16 sm:h-20 sm:w-20 object-contain mb-4 filter drop-shadow-sm brightness-90 contrast-125" 
                 />
                 <span className={`text-xs font-bold px-3 py-1.5 rounded-full border ${feat.bg}`}>
                   {feat.title}
@@ -271,162 +271,158 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Full Screen Interactive Banners Stream */}
-      <section className="w-full space-y-0 pb-16 overflow-hidden">
-        {/* Banner 1: Crazy Deals (Left Aligned on Desktop) */}
-        <ScrollReveal animation="fade-up" duration="duration-1000">
-          <div 
-            onClick={() => navigate('/shop')}
-            className="relative h-[60vh] sm:h-[75vh] lg:h-[90vh] w-full overflow-hidden flex flex-col justify-end lg:justify-center p-6 sm:p-16 lg:px-24 text-white group border-b border-neutral-900 cursor-pointer"
-          >
-            {/* Parallax Zoom Background */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[2000ms]"
-              style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/banner_2new.jpg')` }}
-            />
-            {/* Responsive Gradient overlay: bottom-to-top on mobile, left-to-right on desktop */}
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/65 to-transparent lg:bg-gradient-to-r lg:from-neutral-950/95 lg:via-neutral-950/60 lg:to-transparent group-hover:via-neutral-950/50 transition-colors duration-500" />
-            
-            <div className="relative z-10 space-y-3 sm:space-y-4 max-w-xl">
-              <span className="inline-block bg-brand/20 backdrop-blur-md text-brand border border-brand/20 font-extrabold text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-full uppercase tracking-widest w-fit">
-                Crazy deals
-              </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight text-white group-hover:text-brand transition-colors duration-300">
-                Buy 1 Get 1 <br className="hidden sm:inline"/>Free Selection
-              </h2>
-              <p className="text-xs sm:text-sm lg:text-lg font-medium text-neutral-300 leading-relaxed">
-                The best classic dress selection is on sale at Cara. Elevate your summer wardrobe with premium handcrafted tailoring.
-              </p>
-              <span className="flex items-center gap-2 font-bold text-xs sm:text-sm lg:text-base text-brand-light group-hover:text-brand transition-colors w-fit pt-1 lg:pt-2">
-                Learn More <span className="transform group-hover:translate-x-2 transition-transform duration-300">&rarr;</span>
-              </span>
+      {/* Trending Categories Showcase */}
+      <section className="py-24 bg-neutral-950 border-t border-neutral-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal animation="fade-up">
+            <div className="text-center space-y-2 mb-16">
+              <h2 className="text-3xl font-extrabold sm:text-4xl text-white">Trending Categories</h2>
+              <p className="text-neutral-400 text-sm font-medium">Curated collections designed to elevate your personal style.</p>
             </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
 
-        {/* Banner 2: Limited Offer Shoes (Right Aligned on Desktop) */}
-        <ScrollReveal animation="fade-up" duration="duration-1000">
-          <div 
-            onClick={() => navigate('/shop')}
-            className="relative h-[60vh] sm:h-[75vh] lg:h-[90vh] w-full overflow-hidden flex flex-col justify-end lg:justify-center items-start lg:items-end p-6 sm:p-16 lg:px-24 text-left lg:text-right text-white group border-b border-neutral-900 cursor-pointer"
-          >
-            {/* Parallax Zoom Background */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[2000ms]"
-              style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/banner_3.jpg')` }}
-            />
-            {/* Responsive Gradient overlay: bottom-to-top on mobile, right-to-left on desktop */}
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/65 to-transparent lg:bg-gradient-to-l lg:from-neutral-950/95 lg:via-neutral-950/60 lg:to-transparent group-hover:via-neutral-950/50 transition-colors duration-500" />
-            
-            <div className="relative z-10 space-y-3 sm:space-y-4 max-w-xl flex flex-col items-start lg:items-end">
-              <span className="inline-block bg-brand/20 backdrop-blur-md text-brand border border-brand/20 font-extrabold text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-full uppercase tracking-widest w-fit">
-                Limited Offer
-              </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight text-white group-hover:text-brand transition-colors duration-300">
-                50% Off On <br className="hidden sm:inline"/>All Footwear
-              </h2>
-              <p className="text-xs sm:text-sm lg:text-lg font-medium text-neutral-300 leading-relaxed">
-                Grab the best footwear collection at an exclusive seasonal discount. Clean lines, handcrafted leather, modern fits.
-              </p>
-              <span className="flex items-center gap-2 font-bold text-xs sm:text-sm lg:text-base text-brand-light group-hover:text-brand transition-colors w-fit pt-1 lg:pt-2">
-                Shop Now <span className="transform group-hover:translate-x-2 transition-transform duration-300">&rarr;</span>
-              </span>
-            </div>
-          </div>
-        </ScrollReveal>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Category 1 */}
+            <ScrollReveal animation="fade-up" delay={100}>
+              <div 
+                onClick={() => navigate('/shop')}
+                className="group relative h-72 sm:h-96 rounded-3xl overflow-hidden cursor-pointer border border-neutral-900 shadow-premium"
+              >
+                <img 
+                  src={`${import.meta.env.BASE_URL}image/polomen1.jpg`} 
+                  alt="Men's Collection" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent" />
+                <div className="absolute bottom-8 left-8 space-y-2">
+                  <h3 className="text-2xl font-bold text-white">Casual Men</h3>
+                  <p className="text-neutral-400 text-sm">Premium polos, summer tees & shorts</p>
+                  <span className="inline-flex items-center gap-1.5 text-brand font-bold text-sm pt-2 group-hover:text-brand-light transition-colors">
+                    Shop Collection &rarr;
+                  </span>
+                </div>
+              </div>
+            </ScrollReveal>
 
-        {/* Banner 3: Seasonal Sale (Left Aligned on Desktop) */}
-        <ScrollReveal animation="fade-up" duration="duration-1000">
-          <div 
-            onClick={() => navigate('/shop')}
-            className="relative h-[60vh] sm:h-[75vh] lg:h-[90vh] w-full overflow-hidden flex flex-col justify-end lg:justify-center p-6 sm:p-16 lg:px-24 text-white group border-b border-neutral-900 cursor-pointer"
-          >
-            {/* Parallax Zoom Background */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[2000ms]"
-              style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/banner_4.jpg')` }}
-            />
-            {/* Responsive Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/65 to-transparent lg:bg-gradient-to-r lg:from-neutral-950/95 lg:via-neutral-950/60 lg:to-transparent group-hover:via-neutral-950/50 transition-colors duration-500" />
-            
-            <div className="relative z-10 space-y-3 sm:space-y-4 max-w-xl">
-              <span className="inline-block bg-red-950/50 backdrop-blur-md text-red-400 border border-red-900/30 font-extrabold text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-full uppercase tracking-widest w-fit">
-                Seasonal Drop
-              </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight text-white group-hover:text-brand transition-colors duration-300">
-                Winter Collection <br className="hidden sm:inline"/>Seasonal Sale
-              </h2>
-              <p className="text-xs sm:text-sm lg:text-lg font-medium text-neutral-300 leading-relaxed">
-                Explore 50% off on our heavy-weight winter collection select jackets, heavy knits, and functional layout layering.
-              </p>
-              <span className="flex items-center gap-2 font-bold text-xs sm:text-sm lg:text-base text-brand-light group-hover:text-brand transition-colors w-fit pt-1 lg:pt-2">
-                Explore Collection <span className="transform group-hover:translate-x-2 transition-transform duration-300">&rarr;</span>
-              </span>
-            </div>
-          </div>
-        </ScrollReveal>
+            {/* Category 2 */}
+            <ScrollReveal animation="fade-up" delay={200}>
+              <div 
+                onClick={() => navigate('/shop')}
+                className="group relative h-72 sm:h-96 rounded-3xl overflow-hidden cursor-pointer border border-neutral-900 shadow-premium"
+              >
+                <img 
+                  src={`${import.meta.env.BASE_URL}image/img_7.avif`} 
+                  alt="Women's Collection" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent" />
+                <div className="absolute bottom-8 left-8 space-y-2">
+                  <h3 className="text-2xl font-bold text-white">Summer Luxe</h3>
+                  <p className="text-neutral-400 text-sm">Breathable dresses, activewear & accessories</p>
+                  <span className="inline-flex items-center gap-1.5 text-brand font-bold text-sm pt-2 group-hover:text-brand-light transition-colors">
+                    Shop Collection &rarr;
+                  </span>
+                </div>
+              </div>
+            </ScrollReveal>
 
-        {/* Banner 4: T-Shirts Collection (Right Aligned on Desktop) */}
-        <ScrollReveal animation="fade-up" duration="duration-1000">
-          <div 
-            onClick={() => navigate('/shop')}
-            className="relative h-[60vh] sm:h-[75vh] lg:h-[90vh] w-full overflow-hidden flex flex-col justify-end lg:justify-center items-start lg:items-end p-6 sm:p-16 lg:px-24 text-left lg:text-right text-white group border-b border-neutral-900 cursor-pointer"
-          >
-            {/* Parallax Zoom Background */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[2000ms]"
-              style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/backimg3.jpg')` }}
-            />
-            {/* Responsive Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/65 to-transparent lg:bg-gradient-to-l lg:from-neutral-950/95 lg:via-neutral-950/60 lg:to-transparent group-hover:via-neutral-950/50 transition-colors duration-500" />
-            
-            <div className="relative z-10 space-y-3 sm:space-y-4 max-w-xl flex flex-col items-start lg:items-end">
-              <span className="inline-block bg-red-950/50 backdrop-blur-md text-red-400 border border-red-900/30 font-extrabold text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-full uppercase tracking-widest w-fit">
-                Summer Essentials
-              </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight text-white group-hover:text-brand transition-colors duration-300">
-                Heavyweight Summer <br className="hidden sm:inline"/>T-Shirts Release
-              </h2>
-              <p className="text-xs sm:text-sm lg:text-lg font-medium text-neutral-300 leading-relaxed">
-                Premium combed ringspun cotton summer tees in rich minimalist colorways. High durability, relaxed modern cuts.
-              </p>
-              <span className="flex items-center gap-2 font-bold text-xs sm:text-sm lg:text-base text-brand-light group-hover:text-brand transition-colors w-fit pt-1 lg:pt-2">
-                View Tees <span className="transform group-hover:translate-x-2 transition-transform duration-300">&rarr;</span>
-              </span>
-            </div>
+            {/* Category 3 */}
+            <ScrollReveal animation="fade-up" delay={300}>
+              <div 
+                onClick={() => navigate('/shop')}
+                className="group relative h-72 sm:h-96 rounded-3xl overflow-hidden cursor-pointer border border-neutral-900 shadow-premium"
+              >
+                <img 
+                  src={`${import.meta.env.BASE_URL}image/banner_3.jpg`} 
+                  alt="Footwear Collection" 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent" />
+                <div className="absolute bottom-8 left-8 space-y-2">
+                  <h3 className="text-2xl font-bold text-white">Active Footwear</h3>
+                  <p className="text-neutral-400 text-sm">Chunky trainers, running shoes & slides</p>
+                  <span className="inline-flex items-center gap-1.5 text-brand font-bold text-sm pt-2 group-hover:text-brand-light transition-colors">
+                    Shop Collection &rarr;
+                  </span>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
+        </div>
+      </section>
 
-        {/* Banner 5: New Footwear (Left Aligned on Desktop) */}
-        <ScrollReveal animation="fade-up" duration="duration-1000">
-          <div 
-            onClick={() => navigate('/shop')}
-            className="relative h-[60vh] sm:h-[75vh] lg:h-[90vh] w-full overflow-hidden flex flex-col justify-end lg:justify-center p-6 sm:p-16 lg:px-24 text-white group border-b border-neutral-900 cursor-pointer"
-          >
-            {/* Parallax Zoom Background */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-[2000ms]"
-              style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/back5.jpg')` }}
-            />
-            {/* Responsive Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/95 via-neutral-950/65 to-transparent lg:bg-gradient-to-r lg:from-neutral-950/95 lg:via-neutral-950/60 lg:to-transparent group-hover:via-neutral-950/50 transition-colors duration-500" />
-            
-            <div className="relative z-10 space-y-3 sm:space-y-4 max-w-xl">
-              <span className="inline-block bg-brand/20 backdrop-blur-md text-brand border border-brand/20 font-extrabold text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-full uppercase tracking-widest w-fit">
-                Spring/Summer 26
-              </span>
-              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-tight text-white group-hover:text-brand transition-colors duration-300">
-                New Footwear <br className="hidden sm:inline"/>SS26 Reissue
-              </h2>
-              <p className="text-xs sm:text-sm lg:text-lg font-medium text-neutral-300 leading-relaxed">
-                Clean aesthetics re-engineered for the street. Premium cushioning, raw suede paneling, timeless performance design.
-              </p>
-              <span className="flex items-center gap-2 font-bold text-xs sm:text-sm lg:text-base text-brand-light group-hover:text-brand transition-colors w-fit pt-1 lg:pt-2">
-                Explore Footwear <span className="transform group-hover:translate-x-2 transition-transform duration-300">&rarr;</span>
-              </span>
+      {/* Customer Testimonials */}
+      <section className="py-24 bg-neutral-900/20 border-t border-neutral-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ScrollReveal animation="fade-up">
+            <div className="text-center space-y-2 mb-16">
+              <h2 className="text-3xl font-extrabold sm:text-4xl text-white">What Our Customers Say</h2>
+              <p className="text-neutral-400 text-sm font-medium">Stories of style and comfort from our global community.</p>
             </div>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <ScrollReveal animation="fade-up" delay={100}>
+              <div className="p-8 bg-neutral-900/40 border border-neutral-900 rounded-3xl space-y-4 hover:border-neutral-800 transition-all duration-300">
+                <div className="flex gap-1 text-amber-500">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={15} fill="currentColor" />)}
+                </div>
+                <p className="text-neutral-300 text-sm leading-relaxed italic">
+                  "Absolutely love the quality of their activewear. The fabric is premium, breathable, and fits perfectly. Will definitely order again!"
+                </p>
+                <div className="flex items-center gap-3 pt-2">
+                  <div className="h-10 w-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-white text-sm">
+                    SK
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white text-sm">Sanduni K.</h4>
+                    <span className="text-xs text-neutral-500">Colombo, LK</span>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={200}>
+              <div className="p-8 bg-neutral-900/40 border border-neutral-900 rounded-3xl space-y-4 hover:border-neutral-800 transition-all duration-300">
+                <div className="flex gap-1 text-amber-500">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={15} fill="currentColor" />)}
+                </div>
+                <p className="text-neutral-300 text-sm leading-relaxed italic">
+                  "The footwear collection is spectacular. The raw suede trainers are incredibly comfortable and look extremely sleek."
+                </p>
+                <div className="flex items-center gap-3 pt-2">
+                  <div className="h-10 w-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-white text-sm">
+                    AP
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white text-sm">Amara P.</h4>
+                    <span className="text-xs text-neutral-500">Galle, LK</span>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={300}>
+              <div className="p-8 bg-neutral-900/40 border border-neutral-900 rounded-3xl space-y-4 hover:border-neutral-800 transition-all duration-300">
+                <div className="flex gap-1 text-amber-500">
+                  {[...Array(5)].map((_, i) => <Star key={i} size={15} fill="currentColor" />)}
+                </div>
+                <p className="text-neutral-300 text-sm leading-relaxed italic">
+                  "Fast shipping and premium packaging. The summer dress is stunning and the fit is true to size. High quality and recommended!"
+                </p>
+                <div className="flex items-center gap-3 pt-2">
+                  <div className="h-10 w-10 rounded-full bg-neutral-800 flex items-center justify-center font-bold text-white text-sm">
+                    MR
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-white text-sm">Malith R.</h4>
+                    <span className="text-xs text-neutral-500">Kandy, LK</span>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
-        </ScrollReveal>
+        </div>
       </section>
 
       {/* Newsletter Signup */}

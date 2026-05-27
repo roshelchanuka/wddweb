@@ -36,7 +36,7 @@ export default function Blog() {
     <div className="relative bg-neutral-950 text-neutral-300 min-h-screen pb-1">
       {/* Hero Section */}
       <section 
-        className="relative h-[85vh] bg-cover bg-top flex items-center px-6 sm:px-12 lg:px-24"
+        className="relative h-[55vh] sm:h-[80vh] lg:h-[85vh] bg-cover bg-center flex items-center px-6 sm:px-12 lg:px-24"
         style={{ backgroundImage: `url('${import.meta.env.BASE_URL}image/banner_3.jpg')` }}
       >
         {/* Deep dark premium gradient overlay */}
