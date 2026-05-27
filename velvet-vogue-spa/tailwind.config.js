@@ -8,9 +8,9 @@ export default {
     extend: {
       colors: {
         brand: {
-          light: '#e8f6ea',
-          DEFAULT: '#088178',
-          dark: '#06655e',
+          light: '#F8F1DA',
+          DEFAULT: '#D4AF37', // Premium Gold
+          dark: '#B08E2B',
         },
         velvet: {
           50: '#fbf7f8',

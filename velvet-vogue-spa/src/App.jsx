@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import Header from './components/Header';
@@ -15,8 +14,8 @@ import Signup from './pages/Signup';
 function App() {
   return (
     <CartProvider>
-      <Router>
-        <div className="flex flex-col min-h-screen bg-neutral-50 selection:bg-brand selection:text-white">
+      <Router basename="/wddweb">
+        <div className="flex flex-col min-h-screen bg-neutral-950 text-neutral-300 selection:bg-brand selection:text-white">
           {/* Header */}
           <Header />
 

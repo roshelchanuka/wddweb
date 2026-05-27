@@ -1,18 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ShoppingCart, Menu, X, User } from 'lucide-react';
-import { CartContext } from '../context/CartContext';
+import { CartContext } from '../context/cart-context';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
-  const [isAtTop, setIsAtTop] = useState(true);
   const { cartTotalCount } = useContext(CartContext);
   const location = useLocation();
 
   const navLinks = [
     { name: 'Product Categories', path: '/' },
-    { name: 'Shopping Cart', path: '/shop' },
+    { name: 'Shop', path: '/shop' },
     { name: 'Customer Support', path: '/support' },
     { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
@@ -28,13 +27,6 @@ export default function Header() {
 
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
-      // Toggle top status
-      if (currentScrollY < 30) {
-        setIsAtTop(true);
-      } else {
-        setIsAtTop(false);
-      }
 
       // Hide navbar when scrolling down, show when scrolling up
       if (currentScrollY > lastScrollY && currentScrollY > 120) {

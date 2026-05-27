@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ScrollReveal({ 
   children, 
@@ -22,13 +22,15 @@ export default function ScrollReveal({
       }
     );
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
+    const element = elementRef.current;
+
+    if (element) {
+      observer.observe(element);
     }
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (element) {
+        observer.unobserve(element);
       }
     };
   }, []);

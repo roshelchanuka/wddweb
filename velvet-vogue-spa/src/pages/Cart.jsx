@@ -1,6 +1,15 @@
-import React, { useContext, useState } from 'react';
-import { CartContext } from '../context/CartContext';
-import { Trash2, Plus, Minus, Tag, ShoppingBag, ArrowRight, Lock, ShieldCheck, X } from 'lucide-react';
+import { useContext, useState } from 'react';
+import { CartContext } from '../context/cart-context';
+import { Trash2, Plus, Minus, Tag, ShoppingBag, Lock, ShieldCheck, X } from 'lucide-react';
+
+const createOrderMeta = () => ({
+  orderId: 'VV-' + Math.floor(100000 + Math.random() * 900000),
+  orderDate: new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }),
+});
 
 export default function Cart() {
   const { cartItems, removeFromCart, updateQuantity, clearCart, cartSubtotal } = useContext(CartContext);
@@ -106,30 +115,38 @@ export default function Cart() {
       shipping: finalShipping,
       appliedCouponCode: appliedCoupon ? appliedCoupon.code : null,
       grandTotal: grandTotal,
-      orderId: 'VV-' + Math.floor(100000 + Math.random() * 900000),
-      orderDate: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+      ...createOrderMeta(),
     };
 
-    // Save order data for invoice page access
     localStorage.setItem('velvet_vogue_last_order', JSON.stringify(orderData));
 
     setTimeout(() => {
       clearCart();
       setIsProcessing(false);
       setIsCheckoutOpen(false);
-      // Redirect gracefully to success page
       window.location.href = '/wddweb/order-success.html';
     }, 1500);
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <div 
+      className="min-h-screen pb-16 bg-cover bg-center bg-fixed relative"
+      style={{ backgroundImage: `url('/wddweb/image/shopheader.avif')` }}
+    >
+      {/* Dark Glassmorphism Overlay for entire page */}
+      <div className="absolute inset-0 bg-neutral-950/80 backdrop-blur-[6px] z-0"></div>
+
+      <div className="relative z-10 pt-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Title Section */}
-        <div className="mb-8">
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight">Shopping Bag</h1>
-          <p className="mt-2 text-sm sm:text-base text-neutral-500">
+        <div className="mb-10 text-center animate-reveal">
+          <span className="inline-block rounded-full bg-brand/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-brand backdrop-blur-md border border-brand/30 mb-4">
+            Secure Checkout
+          </span>
+          <h1 className="font-extrabold text-4xl sm:text-6xl text-white leading-tight drop-shadow-xl">
+            Shopping Bag
+          </h1>
+          <p className="mt-4 text-neutral-300 text-base sm:text-lg font-medium drop-shadow-md">
             {cartItems.length > 0 
               ? `Review your premium selected styles (${cartItems.reduce((acc, item) => acc + item.quantity, 0)} items)` 
               : 'Your elegant style collection is currently empty.'
@@ -139,17 +156,17 @@ export default function Cart() {
 
         {cartItems.length === 0 ? (
           /* Empty Cart State */
-          <div className="bg-white rounded-2xl shadow-sm border border-neutral-100 p-12 text-center max-w-lg mx-auto mt-8">
-            <div className="w-20 h-20 bg-neutral-50 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
-              <ShoppingBag size={40} className="text-neutral-300" />
+          <div className="glass-card p-12 text-center max-w-lg mx-auto mt-8 animate-reveal">
+            <div className="w-20 h-20 bg-neutral-800/50 rounded-full flex items-center justify-center mx-auto mb-6">
+              <ShoppingBag size={40} className="text-brand" />
             </div>
-            <h2 className="text-2xl font-bold text-neutral-800 mb-3">Your Cart is Empty</h2>
-            <p className="text-neutral-500 mb-8 leading-relaxed">
+            <h2 className="text-2xl font-bold text-white mb-3">Your Cart is Empty</h2>
+            <p className="text-neutral-400 mb-8 leading-relaxed">
               Before you checkout, you must add some beautiful fashion elements to your shopping cart. You will find lots of interesting products on our shop page!
             </p>
             <a 
-              href="/wddweb/shop.html" 
-              className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-semibold rounded-xl text-white bg-[#088178] hover:bg-[#06665f] shadow-lg shadow-teal-900/10 hover:shadow-teal-900/20 transition-all duration-200"
+              href="/wddweb/shop" 
+              className="btn-primary inline-flex items-center justify-center"
             >
               Start Shopping Now
             </a>
@@ -159,15 +176,15 @@ export default function Cart() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
             
             {/* Left Side: Cart Items Table Card */}
-            <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-neutral-100 overflow-hidden">
-              <div className="p-6 border-b border-neutral-100">
-                <h2 className="text-lg font-bold text-neutral-900">Items List</h2>
+            <div className="lg:col-span-2 glass-card overflow-hidden">
+              <div className="p-6 border-b border-neutral-800/50">
+                <h2 className="text-lg font-bold text-white">Items List</h2>
               </div>
               
               <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                   <thead>
-                    <tr className="border-b border-neutral-100 bg-neutral-50/50">
+                    <tr className="border-b border-neutral-800/50 bg-neutral-900/30">
                       <th className="py-4 px-6 text-xs font-bold text-neutral-400 uppercase tracking-wider">Product</th>
                       <th className="py-4 px-6 text-xs font-bold text-neutral-400 uppercase tracking-wider text-center">Price</th>
                       <th className="py-4 px-6 text-xs font-bold text-neutral-400 uppercase tracking-wider text-center">Quantity</th>
@@ -175,9 +192,9 @@ export default function Cart() {
                       <th className="py-4 px-6 text-xs font-bold text-neutral-400 uppercase tracking-wider text-center"></th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-neutral-100">
+                  <tbody className="divide-y divide-neutral-800/50">
                     {cartItems.map((item, idx) => (
-                      <tr key={idx} className="group hover:bg-neutral-50/30 transition-colors">
+                      <tr key={idx} className="group hover:bg-neutral-800/30 transition-colors">
                         
                         {/* Product Detail Cell */}
                         <td className="py-4 px-6">
@@ -185,14 +202,14 @@ export default function Cart() {
                             <img 
                               src={item.image} 
                               alt={item.name} 
-                              className="w-16 h-16 rounded-lg object-cover border border-neutral-100 flex-shrink-0"
+                              className="w-16 h-16 rounded-lg object-cover border border-neutral-700 flex-shrink-0"
                               onError={(e) => { e.target.src = './image/logo.avif'; }}
                             />
                             <div>
-                              <h3 className="font-bold text-sm text-neutral-800 group-hover:text-[#088178] transition-colors line-clamp-1 max-w-[180px] sm:max-w-[240px]">
+                              <h3 className="font-bold text-sm text-neutral-200 group-hover:text-brand transition-colors line-clamp-1 max-w-[180px] sm:max-w-[240px]">
                                 {item.name}
                               </h3>
-                              <span className="inline-block mt-1 text-xs font-semibold px-2 py-0.5 bg-neutral-100 text-neutral-600 rounded-md">
+                              <span className="inline-block mt-1 text-xs font-semibold px-2 py-0.5 bg-neutral-800 text-neutral-400 rounded-md">
                                 Size: {item.size}
                               </span>
                             </div>
@@ -200,26 +217,26 @@ export default function Cart() {
                         </td>
 
                         {/* Price Cell */}
-                        <td className="py-4 px-6 text-center font-semibold text-sm text-neutral-700">
+                        <td className="py-4 px-6 text-center font-semibold text-sm text-neutral-300">
                           {formatLKR(item.price)}
                         </td>
 
                         {/* Qty Cell */}
                         <td className="py-4 px-6">
                           <div className="flex items-center justify-center">
-                            <div className="flex items-center border border-neutral-200 rounded-lg overflow-hidden bg-white shadow-sm">
+                            <div className="flex items-center border border-neutral-700 rounded-lg overflow-hidden bg-neutral-900/50">
                               <button 
                                 onClick={() => handleQtyChange(item, -1)}
-                                className="w-8 h-8 flex items-center justify-center text-neutral-500 hover:bg-neutral-100 hover:text-[#088178] transition-colors"
+                                className="w-8 h-8 flex items-center justify-center text-neutral-400 hover:bg-neutral-800 hover:text-brand transition-colors"
                               >
                                 <Minus size={14} />
                               </button>
-                              <span className="w-10 text-center font-bold text-sm text-neutral-800">
+                              <span className="w-10 text-center font-bold text-sm text-neutral-200">
                                 {item.quantity}
                               </span>
                               <button 
                                 onClick={() => handleQtyChange(item, 1)}
-                                className="w-8 h-8 flex items-center justify-center text-neutral-500 hover:bg-neutral-100 hover:text-[#088178] transition-colors"
+                                className="w-8 h-8 flex items-center justify-center text-neutral-400 hover:bg-neutral-800 hover:text-brand transition-colors"
                               >
                                 <Plus size={14} />
                               </button>
@@ -228,7 +245,7 @@ export default function Cart() {
                         </td>
 
                         {/* Subtotal Cell */}
-                        <td className="py-4 px-6 text-right font-bold text-sm text-neutral-900">
+                        <td className="py-4 px-6 text-right font-bold text-sm text-white">
                           {formatLKR(item.price * item.quantity)}
                         </td>
 
@@ -236,7 +253,7 @@ export default function Cart() {
                         <td className="py-4 px-6 text-center">
                           <button 
                             onClick={() => removeFromCart(item.id, item.size, item.name)}
-                            className="text-neutral-300 hover:text-red-500 hover:bg-red-50 p-2 rounded-full transition-all"
+                            className="text-neutral-500 hover:text-red-400 hover:bg-neutral-800 p-2 rounded-full transition-all"
                             title="Remove style"
                           >
                             <Trash2 size={16} />
@@ -252,29 +269,29 @@ export default function Cart() {
             {/* Right Side: Cart Summary Card */}
             <div className="space-y-6">
               
-              <div className="bg-white rounded-2xl shadow-sm border border-neutral-100 p-6">
-                <h3 className="text-lg font-bold text-neutral-900 border-b border-neutral-100 pb-4 mb-6">Order Summary</h3>
+              <div className="glass-card p-6">
+                <h3 className="text-lg font-bold text-white border-b border-neutral-800/50 pb-4 mb-6">Order Summary</h3>
                 
                 {/* Coupon Input */}
                 <div className="mb-6">
-                  <label className="block text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2">Apply Promo Code</label>
+                  <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">Apply Promo Code</label>
                   <form onSubmit={handleApplyCoupon} className="flex gap-2">
                     <input 
                       type="text" 
                       placeholder="e.g. WELCOME20"
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
-                      className="flex-grow border border-neutral-200 rounded-lg px-3 py-2 text-sm uppercase font-semibold focus:outline-none focus:border-[#088178] transition-colors"
+                      className="input-field flex-grow"
                     />
                     <button 
                       type="submit"
-                      className="bg-neutral-950 hover:bg-[#088178] text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
+                      className="btn-primary px-4 py-2"
                     >
                       Apply
                     </button>
                   </form>
                   {couponFeedback.text && (
-                    <p className={`mt-2 text-xs font-semibold ${couponFeedback.type === 'success' ? 'text-green-600' : 'text-red-500'}`}>
+                    <p className={`mt-2 text-xs font-semibold ${couponFeedback.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>
                       {couponFeedback.text}
                     </p>
                   )}
@@ -282,11 +299,11 @@ export default function Cart() {
 
                 {/* Shipping Selector */}
                 <div className="mb-6">
-                  <label className="block text-xs font-bold text-neutral-500 uppercase tracking-wider mb-2">Shipping Method</label>
+                  <label className="block text-xs font-bold text-neutral-400 uppercase tracking-wider mb-2">Shipping Method</label>
                   <select 
                     value={shippingCost}
                     onChange={(e) => setShippingCost(parseInt(e.target.value))}
-                    className="w-full border border-neutral-200 rounded-lg p-2.5 text-sm bg-white focus:outline-none focus:border-[#088178]"
+                    className="input-field appearance-none bg-neutral-900"
                   >
                     <option value={350}>Standard Delivery (LKR 350.00 - 3-5 days)</option>
                     <option value={600}>Express Priority (LKR 600.00 - 1-2 days)</option>
@@ -295,14 +312,14 @@ export default function Cart() {
                 </div>
 
                 {/* Price Breakdowns */}
-                <div className="border-t border-neutral-100 pt-4 space-y-3.5">
-                  <div className="flex justify-between text-sm text-neutral-500 font-medium">
+                <div className="border-t border-neutral-800/50 pt-4 space-y-3.5">
+                  <div className="flex justify-between text-sm text-neutral-400 font-medium">
                     <span>Cart Subtotal</span>
-                    <span className="text-neutral-800">{formatLKR(subtotal)}</span>
+                    <span className="text-neutral-200">{formatLKR(subtotal)}</span>
                   </div>
 
                   {discount > 0 && (
-                    <div className="flex justify-between text-sm text-green-600 font-semibold">
+                    <div className="flex justify-between text-sm text-green-400 font-semibold">
                       <div className="flex items-center gap-1">
                         <Tag size={14} />
                         <span>Coupon Savings ({appliedCoupon?.code})</span>
@@ -311,23 +328,23 @@ export default function Cart() {
                     </div>
                   )}
 
-                  <div className="flex justify-between text-sm text-neutral-500 font-medium">
+                  <div className="flex justify-between text-sm text-neutral-400 font-medium">
                     <span>Shipping Handling</span>
-                    <span className="text-neutral-800">
+                    <span className="text-neutral-200">
                       {finalShipping === 0 ? 'FREE' : formatLKR(finalShipping)}
                     </span>
                   </div>
 
-                  <div className="flex justify-between items-center border-t border-dashed border-neutral-200 pt-4 mt-2">
-                    <span className="text-base font-extrabold text-neutral-900">Total Amount</span>
-                    <span className="text-xl font-black text-[#088178]">{formatLKR(grandTotal)}</span>
+                  <div className="flex justify-between items-center border-t border-dashed border-neutral-700 pt-4 mt-2">
+                    <span className="text-base font-extrabold text-white">Total Amount</span>
+                    <span className="text-xl font-black text-brand">{formatLKR(grandTotal)}</span>
                   </div>
                 </div>
 
                 {/* Checkout Trigger Button */}
                 <button 
                   onClick={() => setIsCheckoutOpen(true)}
-                  className="w-full mt-6 bg-[#088178] hover:bg-[#06665f] text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg shadow-teal-900/10 hover:shadow-teal-950/20 transition-all duration-200"
+                  className="btn-primary w-full mt-6 flex items-center justify-center gap-2"
                 >
                   <Lock size={16} />
                   <span>Secure Checkout</span>
@@ -335,11 +352,11 @@ export default function Cart() {
               </div>
 
               {/* Security Badges */}
-              <div className="bg-white rounded-2xl border border-neutral-100 p-4 flex items-center gap-3">
-                <ShieldCheck size={36} className="text-teal-600 flex-shrink-0" />
+              <div className="glass-card p-4 flex items-center gap-3">
+                <ShieldCheck size={36} className="text-brand flex-shrink-0" />
                 <div>
-                  <h4 className="text-xs font-bold text-neutral-800">Secured Payments</h4>
-                  <p className="text-[11px] text-neutral-500 mt-0.5">SSL encrypted gateways ensure safe order logs and protected processing sheets.</p>
+                  <h4 className="text-xs font-bold text-white">Secured Payments</h4>
+                  <p className="text-[11px] text-neutral-400 mt-0.5">SSL encrypted gateways ensure safe order logs and protected processing sheets.</p>
                 </div>
               </div>
 
@@ -352,18 +369,18 @@ export default function Cart() {
 
       {/* Checkout Modal Overlay Sheet */}
       {isCheckoutOpen && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-neutral-950/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl shadow-2xl border border-neutral-100 max-w-lg w-full overflow-hidden relative animate-in fade-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-neutral-950/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="glass-card max-w-lg w-full overflow-hidden relative animate-reveal">
             
             {/* Modal Header */}
-            <div className="p-6 border-b border-neutral-100 flex justify-between items-center bg-neutral-50/50">
+            <div className="p-6 border-b border-neutral-800/50 flex justify-between items-center bg-neutral-900/40">
               <div>
-                <h2 className="text-xl font-extrabold text-neutral-900">Checkout Ledger</h2>
-                <p className="text-xs text-neutral-500 mt-1">Provide your delivery and payment coordinates.</p>
+                <h2 className="text-xl font-extrabold text-white">Checkout Ledger</h2>
+                <p className="text-xs text-neutral-400 mt-1">Provide your delivery and payment coordinates.</p>
               </div>
               <button 
                 onClick={() => setIsCheckoutOpen(false)}
-                className="text-neutral-400 hover:text-neutral-600 hover:bg-neutral-100 p-2 rounded-full transition-all"
+                className="text-neutral-400 hover:text-white hover:bg-neutral-800 p-2 rounded-full transition-all"
               >
                 <X size={18} />
               </button>
@@ -374,7 +391,7 @@ export default function Cart() {
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-neutral-600">Full Name *</label>
+                  <label className="text-xs font-bold text-neutral-400">Full Name *</label>
                   <input 
                     type="text" 
                     name="name"
@@ -382,11 +399,11 @@ export default function Cart() {
                     value={checkoutForm.name}
                     onChange={handleInputChange}
                     placeholder="Enter full name"
-                    className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#088178]"
+                    className="input-field"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-neutral-600">Email Address *</label>
+                  <label className="text-xs font-bold text-neutral-400">Email Address *</label>
                   <input 
                     type="email" 
                     name="email"
@@ -394,13 +411,13 @@ export default function Cart() {
                     value={checkoutForm.email}
                     onChange={handleInputChange}
                     placeholder="name@example.com"
-                    className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#088178]"
+                    className="input-field"
                   />
                 </div>
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-neutral-600">Contact Number *</label>
+                <label className="text-xs font-bold text-neutral-400">Contact Number *</label>
                 <input 
                   type="tel" 
                   name="phone"
@@ -408,12 +425,12 @@ export default function Cart() {
                   value={checkoutForm.phone}
                   onChange={handleInputChange}
                   placeholder="e.g. +94 77 123 4567"
-                  className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#088178]"
+                  className="input-field"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-bold text-neutral-600">Shipping Street Address *</label>
+                <label className="text-xs font-bold text-neutral-400">Shipping Street Address *</label>
                 <input 
                   type="text" 
                   name="address"
@@ -421,13 +438,13 @@ export default function Cart() {
                   value={checkoutForm.address}
                   onChange={handleInputChange}
                   placeholder="House number, Street name"
-                  className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#088178]"
+                  className="input-field"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-neutral-600">City / District *</label>
+                  <label className="text-xs font-bold text-neutral-400">City / District *</label>
                   <input 
                     type="text" 
                     name="city"
@@ -435,16 +452,16 @@ export default function Cart() {
                     value={checkoutForm.city}
                     onChange={handleInputChange}
                     placeholder="e.g. Colombo"
-                    className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#088178]"
+                    className="input-field"
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-neutral-600">Payment Option *</label>
+                  <label className="text-xs font-bold text-neutral-400">Payment Option *</label>
                   <select 
                     name="payment"
                     value={checkoutForm.payment}
                     onChange={handleInputChange}
-                    className="w-full border border-neutral-200 rounded-lg px-3 py-2 text-sm bg-white focus:outline-none focus:border-[#088178]"
+                    className="input-field appearance-none bg-neutral-900"
                   >
                     <option value="cod">Cash on Delivery (COD)</option>
                     <option value="card">Credit or Debit Card</option>
@@ -457,7 +474,7 @@ export default function Cart() {
               <button 
                 type="submit"
                 disabled={isProcessing}
-                className="w-full mt-6 bg-[#088178] hover:bg-[#06665f] disabled:bg-neutral-300 text-white font-bold py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all"
+                className="btn-primary w-full mt-6 flex items-center justify-center gap-2"
               >
                 {isProcessing ? (
                   <>

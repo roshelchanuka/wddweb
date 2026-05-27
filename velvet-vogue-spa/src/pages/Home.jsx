@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ShoppingCart, Star, ArrowRight } from 'lucide-react';
 import { products } from '../data/products';
-import { CartContext } from '../context/CartContext';
+import { CartContext } from '../context/cart-context';
 import ScrollReveal from '../components/ScrollReveal';
 
 export default function Home() {
